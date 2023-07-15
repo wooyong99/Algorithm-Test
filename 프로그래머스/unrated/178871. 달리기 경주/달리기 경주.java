@@ -5,32 +5,27 @@ import java.util.stream.*;
 
 class Solution {
     public String[] solution(String[] players, String[] callings) {
-        
         HashMap<String,Integer> list = new HashMap<>();
         for(int i = 0; i<players.length; i++){
             list.put(players[i], i);
         }
         
-        
         for(String name : callings){
             int idx = list.get(name);
-            
-            if (idx == 0) {
-                continue;
-            }            
-            
-            int idx2 = idx-1;
-            String name2 = players[idx2];
-
-            players[idx2] = name;
-            players[idx] = name2;
-            
-            list.put(name, idx2);
-            list.put(name2, idx);
+            Set<Entry<String, Integer>> entrySet = list.entrySet();
+            for (Entry<String, Integer> entry : entrySet) {
+                if (entry.getValue().equals(idx-1)) {
+                    list.put(entry.getKey(), idx);
+                    list.put(name, idx-1);
+                }
+            }
             
         }
 
+        Set<Entry<String,Integer>> entrySet = list.entrySet();
+        entrySet.forEach(System.out::println);
         
-        return players;
+        
+        return null;
     }
 }
