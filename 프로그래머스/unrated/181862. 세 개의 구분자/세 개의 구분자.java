@@ -1,21 +1,19 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 
 class Solution {
     public String[] solution(String myStr) {
-        List<String> list = Stream.of(myStr.split("a|b|c")).collect(Collectors.toList());
-        List<String> del = new ArrayList<>();
-        del.add("");
-        if(list.size() == 0){
-            String[] rs = new String[1];
-            rs[0] = "EMPTY";
-            return rs;
-        }else{
-            list.removeAll(del);
+        StringTokenizer st = new StringTokenizer(myStr, "a|b|c");
+        String[] answer = new String[st.countTokens()];
+        if(st.countTokens() == 0){
+            String[] answer2 = new String[1];
+            answer2[0] = "EMPTY";
+            return answer2;
         }
-        
-        return list.toArray(new String[list.size()]);
+        for(int i = 0 ;i<answer.length; i++){
+            answer[i] = st.nextToken();
+        }
+        return answer;
     }
 }
