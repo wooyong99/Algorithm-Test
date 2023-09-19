@@ -1,25 +1,25 @@
 class Solution {
+    static int cnt = 0;
     public int solution(int left, int right) {
-        int answer = 0;
-        
+        int sum = 0;
         for(int i = left; i<=right; i++){
-            if(isPrime(i) % 2==0){
-                answer += i;
+            cnt =0;
+            getCnt(i,1);
+            if(cnt % 2==0){
+                sum += i;
             }else{
-                answer -= i;
+                sum -= i;
             }
         }
-        
-        return answer;
+        return sum;
     }
-    
-    public int isPrime(int num){
-        int rs = 0;
-        for(int i = 1; i<=num; i++){
-           if(num % i==0){
-                rs++;
-           }         
-        }  
-        return rs;
+    public static void getCnt(int num, int min){
+        if(min > num){
+            return;
+        }
+        if( num % min == 0){
+            cnt++;
+        }
+        getCnt(num, min+1);
     }
 }
